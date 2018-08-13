@@ -16,6 +16,6 @@
 	<dubbo:reference interface="com.taotao.springboot.item.export.ItemCatResource" id="itemCatResource" />
 	<dubbo:reference interface="com.taotao.springboot.content.export.ContentResource" id="contentResource" />
 	<dubbo:reference interface="com.taotao.springboot.content.export.ContentCategoryResource" id="contentCategoryResource" />
-	<dubbo:reference interface="com.taotao.springboot.search.export.SearchResource" id="searchItemResource" />
+	<dubbo:reference interface="com.taotao.springboot.search.export.SearchResource" id="searchResource" />
 
 </beans>
