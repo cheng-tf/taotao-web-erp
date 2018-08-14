@@ -2,6 +2,8 @@ package com.taotao.springboot.web.erp.controller;
 
 import com.taotao.springboot.item.domain.result.EasyUITreeNode;
 import com.taotao.springboot.item.export.ItemCatResource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,13 +24,18 @@ import java.util.List;
 @RequestMapping("/item/cat")
 public class ItemCatController {
 
+    private static final Logger log = LoggerFactory.getLogger(ItemCatController.class);
+
     @Autowired
     private ItemCatResource itemCatResource;
 
     @RequestMapping("/list")
     @ResponseBody
     public List<EasyUITreeNode> getItemCatList(@RequestParam(name = "id", defaultValue = "0") long parentId) {
-        return itemCatResource.getItemCatList(parentId);
+        log.info("查询商品类目列表， parentId = {}", String.valueOf(parentId));
+        List<EasyUITreeNode> lists = itemCatResource.getItemCatList(parentId);
+        log.info("查询商品类目列表完成");
+        return lists;
     }
 
 }
