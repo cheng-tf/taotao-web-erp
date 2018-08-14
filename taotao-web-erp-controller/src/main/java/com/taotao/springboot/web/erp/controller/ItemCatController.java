@@ -2,6 +2,7 @@ package com.taotao.springboot.web.erp.controller;
 
 import com.taotao.springboot.item.domain.result.EasyUITreeNode;
 import com.taotao.springboot.item.export.ItemCatResource;
+import com.taotao.springboot.web.erp.common.utils.JacksonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,9 @@ public class ItemCatController {
     @RequestMapping("/list")
     @ResponseBody
     public List<EasyUITreeNode> getItemCatList(@RequestParam(name = "id", defaultValue = "0") long parentId) {
-        log.info("查询商品类目列表， parentId = {}", String.valueOf(parentId));
+        log.info("根据父类目ID查询商品类目列表, parentId={}", String.valueOf(parentId));
         List<EasyUITreeNode> lists = itemCatResource.getItemCatList(parentId);
-        log.info("查询商品类目列表完成");
+        log.info("根据父类目ID查询商品类目列表, res={}", JacksonUtils.objectToJson(lists));
         return lists;
     }
 

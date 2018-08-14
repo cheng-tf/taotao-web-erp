@@ -33,24 +33,28 @@ public class ItemController {
     @RequestMapping("/{itemId}")
     @ResponseBody
     public TbItem getItemById(@PathVariable long itemId) {
-        return itemResource.getItemById(itemId);
+        log.info("根据商品ID查询商品详情信息，itemId={}", String.valueOf(itemId));
+        TbItem item = itemResource.getItemById(itemId);
+        log.info("根据商品ID查询商品详情信息，res={}", JacksonUtils.objectToJson(item));
+        return item;
     }
 
     @RequestMapping("/list")
     @ResponseBody
     public EasyUIDataGridResult getItemList(Integer page, Integer rows) {
-        log.info("Call itemService.getItemList start page={} and rows={}", page, rows);
-        log.debug("Call itemService.getItemList start page={} and rows={}", page, rows);
+        log.info("查询商品列表，page={} and rows={}", String.valueOf(page), String.valueOf(rows));
         EasyUIDataGridResult result = itemResource.getItemList(page, rows);
-        log.info("Call itemService.getItemList end res={}", JacksonUtils.objectToJson(result));
-        log.debug("Call itemService.getItemList end res={}",JacksonUtils.objectToJson(result));
+        log.info("查询商品列表，res={}", JacksonUtils.objectToJson(result));
         return result;
     }
 
     @RequestMapping("/save")
     @ResponseBody
     public TaotaoResult addItem(TbItem item, String desc) {
-        return itemResource.addItem(item, desc);
+        log.info("添加商品，item={}", JacksonUtils.objectToJson(item));
+        TaotaoResult result = itemResource.addItem(item, desc);
+        log.info("添加商品，res={}", JacksonUtils.objectToJson(result));
+        return result;
     }
 
 }

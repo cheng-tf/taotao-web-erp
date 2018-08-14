@@ -2,6 +2,8 @@ package com.taotao.springboot.web.erp.controller;
 
 import com.taotao.springboot.web.erp.common.utils.FastDFSClient;
 import com.taotao.springboot.web.erp.common.utils.JacksonUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +25,15 @@ import java.util.Map;
 @RequestMapping("/pic")
 public class PictureController {
 
+    private static final Logger log = LoggerFactory.getLogger(PictureController.class);
+
     @Value("${IMAGE_SERVER_URL}")
     private String IMAGE_SERVER_URL;
 
     @RequestMapping("/upload")
     @ResponseBody
     public String picUpload(MultipartFile uploadFile) {
+        log.info("商品图片上传");
         try {
             // 接收上传的文件
             // 获取扩展名
@@ -43,12 +48,15 @@ public class PictureController {
             result.put("error", 0);
             result.put("url", url);
             // 返回JSON数据
-            return JacksonUtils.objectToJson(result);
+            String jsonString = JacksonUtils.objectToJson(result);
+            log.info("商品图片上传成功，res={}", jsonString);
+            return jsonString;
         } catch (Exception e) {
+            log.error("商品图片上传失败, error={}", e);
             e.printStackTrace();
             Map<String, Object> result = new HashMap<>();
             result.put("error", 1);
-            result.put("message", "图片上传失败");
+            result.put("message", "商品图片上传失败");
             return JacksonUtils.objectToJson(result);
         }
     }
