@@ -35,25 +35,23 @@ public class PictureController {
     public String picUpload(MultipartFile uploadFile) {
         log.info("商品图片上传");
         try {
-            // 接收上传的文件
-            // 获取扩展名
+            // #1 接收文件，并获取扩展名
             String originalFilename = uploadFile.getOriginalFilename();
             String extName = originalFilename.substring(originalFilename.lastIndexOf(",") + 1);
-            //上传到图片服务器
+            // #2 上传至FastDFS图片服务器
             FastDFSClient fastDFSClient = new FastDFSClient("classpath:resource/client.conf");
             String url = fastDFSClient.uploadFile(uploadFile.getBytes());
+            // #3 获取返回的图片URL
             url = IMAGE_SERVER_URL + url;
-            // 响应上传图片的URL
             Map<String, Object> result = new HashMap<>();
             result.put("error", 0);
             result.put("url", url);
-            // 返回JSON数据
+            // #4 返回JSON数据
             String jsonString = JacksonUtils.objectToJson(result);
             log.info("商品图片上传成功，res={}", jsonString);
             return jsonString;
         } catch (Exception e) {
             log.error("商品图片上传失败, error={}", e);
-            e.printStackTrace();
             Map<String, Object> result = new HashMap<>();
             result.put("error", 1);
             result.put("message", "商品图片上传失败");
