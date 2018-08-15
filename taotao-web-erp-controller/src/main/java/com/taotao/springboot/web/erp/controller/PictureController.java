@@ -30,6 +30,9 @@ public class PictureController {
     @Value("${IMAGE_SERVER_URL}")
     private String IMAGE_SERVER_URL;
 
+    /**
+     * 商品图片上传
+     */
     @RequestMapping("/upload")
     @ResponseBody
     public String picUpload(MultipartFile uploadFile) {

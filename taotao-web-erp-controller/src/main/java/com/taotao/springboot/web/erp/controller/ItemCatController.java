@@ -30,6 +30,9 @@ public class ItemCatController {
     @Autowired
     private ItemCatResource itemCatResource;
 
+    /**
+     * 根据父类目ID查询商品类目列表
+     */
     @RequestMapping("/list")
     @ResponseBody
     public List<EasyUITreeNode> getItemCatList(@RequestParam(name = "id", defaultValue = "0") long parentId) {

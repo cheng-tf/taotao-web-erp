@@ -25,6 +25,9 @@ public class IndexManagerController {
     @Autowired
     private SearchResource searchResource;
 
+    /**
+     * 导入商品数据至索引库
+     */
     @RequestMapping("/index/import")
     @ResponseBody
     public TaotaoResult importIndex() {

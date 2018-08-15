@@ -30,6 +30,9 @@ public class ItemController {
     @Autowired
     private ItemResource itemResource;
 
+    /**
+     * 根据商品ID查询商品详情信息
+     */
     @RequestMapping("/{itemId}")
     @ResponseBody
     public TbItem getItemById(@PathVariable long itemId) {
@@ -39,6 +42,9 @@ public class ItemController {
         return item;
     }
 
+    /**
+     * 查询商品列表（分页）
+     */
     @RequestMapping("/list")
     @ResponseBody
     public EasyUIDataGridResult getItemList(Integer page, Integer rows) {
@@ -48,6 +54,11 @@ public class ItemController {
         return result;
     }
 
+    /**
+     * 添加商品
+     * @param item  商品详情信息
+     * @param desc  商品描述
+     */
     @RequestMapping("/save")
     @ResponseBody
     public TaotaoResult addItem(TbItem item, String desc) {

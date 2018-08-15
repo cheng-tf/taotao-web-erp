@@ -31,6 +31,9 @@ public class ContentCategoryController {
     @Autowired
     private ContentCategoryResource contentCategoryResource;
 
+    /**
+     * 根据父类目ID查询内容类目列表
+     */
     @RequestMapping("/list")
     @ResponseBody
     public List<EasyUITreeNode> getContentCategoryList(
@@ -41,6 +44,9 @@ public class ContentCategoryController {
         return result;
     }
 
+    /**
+     * 添加内容类目
+     */
     @RequestMapping("/create")
     @ResponseBody
     public TaotaoResult addContentCategory(long parentId, String name) {

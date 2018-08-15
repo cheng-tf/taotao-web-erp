@@ -29,21 +29,27 @@ public class ContentController {
     @Autowired
     private ContentResource contentResource;
 
-    @RequestMapping("/save")
-    @ResponseBody
-    public TaotaoResult addContent(TbContent content) {
-        log.info("添加内容，content={}", JacksonUtils.objectToJson(content));
-        TaotaoResult result = contentResource.addContent(content);
-        log.info("添加内容，res={}", JacksonUtils.objectToJson(result));
-        return  result;
-    }
-
+    /**
+     * 根据类目ID查询内容列表
+     */
     @RequestMapping("/query/list")
     @ResponseBody
     public EasyUIDataGridResult getContentList(long categoryId, int page, int rows) {
         log.info("根据内容类目ID查询内容列表, categoryId={}", String.valueOf(categoryId));
         EasyUIDataGridResult result = contentResource.getContentList(categoryId, page, rows);
         log.info("根据内容类目ID查询内容列表，res={}", JacksonUtils.objectToJson(result));
+        return  result;
+    }
+
+    /**
+     * 添加内容
+     */
+    @RequestMapping("/save")
+    @ResponseBody
+    public TaotaoResult addContent(TbContent content) {
+        log.info("添加内容，content={}", JacksonUtils.objectToJson(content));
+        TaotaoResult result = contentResource.addContent(content);
+        log.info("添加内容，res={}", JacksonUtils.objectToJson(result));
         return  result;
     }
 
