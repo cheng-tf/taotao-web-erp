@@ -31,14 +31,14 @@ public class ItemController {
     private ItemResource itemResource;
 
     /**
-     * 根据商品ID查询商品详情信息
+     * 根据商品ID查询商品基本信息
      */
     @RequestMapping("/{itemId}")
     @ResponseBody
     public TbItem getItemById(@PathVariable long itemId) {
-        log.info("根据商品ID查询商品详情信息，itemId={}", String.valueOf(itemId));
+        log.info("根据商品ID查询商品基本信息，itemId={}", String.valueOf(itemId));
         TbItem item = itemResource.getItemById(itemId);
-        log.info("根据商品ID查询商品详情信息，res={}", JacksonUtils.objectToJson(item));
+        log.info("根据商品ID查询商品基本信息，res={}", JacksonUtils.objectToJson(item));
         return item;
     }
 
@@ -56,7 +56,7 @@ public class ItemController {
 
     /**
      * 添加商品
-     * @param item  商品详情信息
+     * @param item  商品基本信息
      * @param desc  商品描述
      */
     @RequestMapping("/save")
